@@ -6,9 +6,7 @@ import { nft_abi, nft_address } from "@/app/utils/nftContractInfo";
 import { market_abi, market_address } from "@/app/utils/marketContractInfo";
 import { dao_abi, dao_address } from "@/app/utils/daoContractInfo";
 import { useAccount } from "wagmi";
-import { setBalance } from "viem/actions";
 interface IWeb3Context {
-  value : number;
   connectContract: (walletAddress : string | undefined)=> Promise<void>;
   buyNft: () => Promise<void>;
   loadMinting: boolean;
@@ -23,10 +21,7 @@ export default Web3Context;
 
 
 export const Web3Provider = ({ children } : {children: React.ReactNode}) => {
-  
-  const {address} = useAccount()
 
-  const [value, setValue] = useState<number>(0);
   const [nftContract, setNftContract] = useState<Contract | null>(null);
   const [marketContract, setMarketContract] = useState<Contract | null> (null);
   const [daoContract, setDaoContract] = useState<Contract | null>(null);
@@ -60,7 +55,7 @@ export const Web3Provider = ({ children } : {children: React.ReactNode}) => {
         setLoadMinting(true);
         try {
             const _price = ethers.parseEther('0.01');
-            const response = await nftContract?.mint({value: _price})
+            await nftContract?.mint({value: _price})
         } catch (error) {
             console.log(error);
         } finally {
@@ -126,7 +121,7 @@ export const Web3Provider = ({ children } : {children: React.ReactNode}) => {
   
 
   return (
-    <Web3Context.Provider value={{ value, connectContract, buyNft, loadMinting, createProposal, allProposals, voteOnProposal, nftBalance}}>
+    <Web3Context.Provider value={{ connectContract, buyNft, loadMinting, createProposal, allProposals, voteOnProposal, nftBalance}}>
       {children}
     </Web3Context.Provider>
   );

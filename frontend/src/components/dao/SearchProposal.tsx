@@ -1,7 +1,6 @@
 'use client'
 import Web3Context from '@/Context/ContractContext';
 import React, { useContext, useState } from 'react';
-import { AiTwotoneLike, AiTwotoneDislike } from "react-icons/ai";
 import Proposal from './Proposal';
 import { FcSearch } from "react-icons/fc";
 const SearchProposals = () => {

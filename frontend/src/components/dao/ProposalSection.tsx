@@ -1,7 +1,6 @@
 import React from 'react';
 import CreateProposal from './CreateProposal';
 import SearchProposals from './SearchProposal';
-import AllProposals from './AllProposals';
 
 const ProposalSection = () => {
   return (
