@@ -48,7 +48,7 @@ contract DAO is Ownable{
     }
     
     mapping(uint256 => Proposal) public proposals;
-    uint256 numProposals;
+    uint256 public numProposals;
 
     enum Vote{
         YAY,
@@ -100,7 +100,7 @@ contract DAO is Ownable{
     }
 
     function voteOnProposal(uint256 _idx, Vote vote) 
-    external nftHolderOnly activeProposalOnly(_idx) {
+    public nftHolderOnly activeProposalOnly(_idx) {
         Proposal storage proposal = proposals[_idx];
 
         uint256 voterNFTBalance = cryptodevs.balanceOf(msg.sender);
