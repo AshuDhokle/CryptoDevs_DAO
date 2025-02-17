@@ -2,20 +2,32 @@
 import Web3Context from '@/Context/ContractContext'
 import React, { useContext } from 'react'
 import { AiTwotoneLike, AiTwotoneDislike } from 'react-icons/ai'
-const Proposal = ({ proposal }: { proposal: any }) => {
-  const web3Context = useContext(Web3Context)
+interface ProposalProps {
+  proposal: ProposalType;
+}
 
-  if (!web3Context) return (<></>)
+interface ProposalType {
+  nftTokenId: number;
+  yay: number;
+  nay: number;
+  isActive: boolean;
+}
+
+const Proposal = ({ proposal }: ProposalProps) => {
+  const web3Context = useContext(Web3Context);
+
+  if (!web3Context) return (<></>);
 
   const { voteOnProposal } = web3Context;
 
-  const handleVote = async (proposalId: any, isYay: boolean) => {
+  const handleVote = async (proposalId: number, isYay: boolean) => {
     if (!proposal.isActive)
-      voteOnProposal(proposalId, isYay === true ? 0 : 1)
-    else alert(`Can't vote: Deadline Exceeded`)
+      voteOnProposal(proposalId, isYay === true ? 0 : 1);
+    else alert(`Can't vote: Deadline Exceeded`);
   };
+
   return (
-    <div className='m-2 p-4 bg-white rounded-lg shadow-lg hover:shadow-purple-600 transition max-w-xl  mx-auto'>
+    <div className='m-2 p-4 bg-white rounded-lg shadow-lg hover:shadow-purple-600 transition max-w-xl mx-auto'>
       <h1 className='text-xl font-mono text-gray-800 mb-2'>NFT Token Id: {proposal.nftTokenId}</h1>
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-4'>
@@ -39,9 +51,7 @@ const Proposal = ({ proposal }: { proposal: any }) => {
         </h1>
       </div>
     </div>
-
-
-  )
-}
+  );
+};
 
 export default Proposal

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useState, useEffect } from "react"
+import React, { createContext, useState } from "react"
 import { ethers, Contract } from "ethers";
 import { nft_abi, nft_address } from "@/app/utils/nftContractInfo";
 import { dao_abi, dao_address } from "@/app/utils/daoContractInfo";
@@ -97,7 +97,6 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
     if (daoContract && nftContract) {
 
       try {
-        const v = ethers.toBigInt(vote)
         await daoContract.voteOnProposal(id - 1, vote);
       } catch (error) {
         console.log(error)
