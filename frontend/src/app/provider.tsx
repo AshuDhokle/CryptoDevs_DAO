@@ -19,7 +19,7 @@ export const config = getDefaultConfig({
     appName: 'Suprabhat_Mitro',
     projectId: process.env.APP_ID || 'ff442c27a8135c24e931212895c19453' ,
     chains: [sepolia],
-    ssr: true, // If your dApp uses server side rendering (SSR)
+    ssr: true, 
   });
 
 export const queryClient = new QueryClient();

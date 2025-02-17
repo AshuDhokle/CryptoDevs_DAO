@@ -22,7 +22,6 @@ export default function Home() {
         <h1 className="font-bold">Nfts Hold: {nftBalance}</h1>
       </div>
       <div className="flex flex-col items-center mb-20">
-        {/* Main Section */}
         <div className="p-10 flex flex-col lg:flex-row items-center justify-center text-center lg:text-left md:mb-36 lg:mb-10">
           <div className="lg:mr-10 max-w-lg">
             <h1 className="m-2 text-7xl font-extrabold">Buy, Hold, Vote</h1>
@@ -56,7 +55,6 @@ export default function Home() {
         </div>
         </div>
 
-        {/* Buy Section */}
       </div>
       <Footer/>
     </div>

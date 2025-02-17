@@ -14,7 +14,6 @@ const HeroSection = () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Hero Section */}
       <div className="p-10 flex flex-col lg:flex-row items-center justify-center text-center lg:text-left md:mb-20 lg:mb-10">
         <div className="lg:mr-10 max-w-lg">
           <h1 className="m-2 text-7xl font-extrabold">Shape the Future of CryptoDev</h1>
@@ -29,7 +28,6 @@ const HeroSection = () => {
         <img src="dao.png" alt="" className="hidden lg:block w-[400px] h-[400px] lg:ml-10" />
       </div>
 
-      {/* Button Section */}
       <div className="flex flex-row items-center justify-center">
       <button
         onClick={scrollToBottom}
