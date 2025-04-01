@@ -1,6 +1,6 @@
-export const dao_address = '0xDF170adBC6bbE5517DF9b81aAF362db28D94943A'
+export const dao_address = '0xe1440DFc7786cb49A38E4db6D5BBF3f5d3d4A85E'
 
-export const dao_abi = [
+export const dao_abi =  [
   {
     "inputs": [
       {
@@ -24,12 +24,12 @@ export const dao_abi = [
   },
   {
     "inputs": [],
-    "name": "DAO_DEADLINE_NOT_EXCEEDED",
+    "name": "DAO_NOT_ENOUGH_ETH",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "DAO_NOT_ENOUGH_ETH",
+    "name": "DAO_PropoalAlreadyRunning",
     "type": "error"
   },
   {
@@ -39,17 +39,12 @@ export const dao_abi = [
   },
   {
     "inputs": [],
-    "name": "DAO__DEADLINE_EXCEEDED",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "DAO__NOT_DAO_MEMBER",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "DAO__TOKEN_NOT_AVAILABLe",
+    "name": "DAO__TOKEN_NOT_AVAILABLE",
     "type": "error"
   },
   {
@@ -94,10 +89,100 @@ export const dao_abi = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "proposalID",
+        "type": "uint256"
+      }
+    ],
+    "name": "ProposalCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "proposalID",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "result",
+        "type": "bool"
+      }
+    ],
+    "name": "ProposalEnded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "proposalID",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "voter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum DAO.Vote",
+        "name": "vote",
+        "type": "uint8"
+      }
+    ],
+    "name": "VoteSubmitted",
+    "type": "event"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "checkUpkeep",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "upkeepNeeded",
+        "type": "bool"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
         "name": "_nftTokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_deadline",
         "type": "uint256"
       }
     ],
@@ -146,6 +231,32 @@ export const dao_abi = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "performUpkeep",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "proposalRunning",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -227,5 +338,9 @@ export const dao_abi = [
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   }
 ]

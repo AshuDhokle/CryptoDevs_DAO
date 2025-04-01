@@ -5,6 +5,7 @@ import Proposal from './Proposal';
 import { FcSearch } from "react-icons/fc";
 
 interface ProposalType {
+  proposalId: number,
   nftTokenId: number;
   yay: number;
   nay: number;
@@ -14,11 +15,8 @@ interface ProposalType {
 const SearchProposals = () => {
   const web3Context = useContext(Web3Context);
   
-  if (!web3Context) {
-    return <div className="flex justify-center items-center h-screen text-xl text-gray-400">Loading...</div>;
-  }
   
-  const { allProposals } = web3Context;
+  const { allProposals } = web3Context || {};
 
   // Specify types correctly
   const [id, setId] = useState<string>('');

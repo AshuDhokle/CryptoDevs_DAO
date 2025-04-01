@@ -7,6 +7,7 @@ interface ProposalProps {
 }
 
 interface ProposalType {
+  proposalId: number
   nftTokenId: number;
   yay: number;
   nay: number;
@@ -15,14 +16,14 @@ interface ProposalType {
 
 const Proposal = ({ proposal }: ProposalProps) => {
   const web3Context = useContext(Web3Context);
-
-  if (!web3Context) return (<></>);
-
-  const { voteOnProposal } = web3Context;
+  const { voteOnProposal } = web3Context || {};
 
   const handleVote = async (proposalId: number, isYay: boolean) => {
-    if (!proposal.isActive)
-      voteOnProposal(proposalId, isYay === true ? 0 : 1);
+    console.log(proposalId);
+    
+    if (!proposal.isActive){
+      voteOnProposal && voteOnProposal(proposalId, isYay === true ? '1' : '0');   
+    }
     else alert(`Can't vote: Deadline Exceeded`);
   };
 
@@ -33,14 +34,14 @@ const Proposal = ({ proposal }: ProposalProps) => {
         <div className='flex items-center space-x-4'>
           <div className='flex items-center space-x-2'>
             <AiTwotoneLike
-              onClick={() => handleVote(proposal.nftTokenId, true)}
+              onClick={() => handleVote(proposal.proposalId , true)}
               className='text-blue-600 cursor-pointer hover:text-blue-800 transition duration-200 size-8'
             />
             <p className='text-lg font-medium text-black'>{proposal.yay}</p>
           </div>
           <div className='flex items-center space-x-2'>
             <AiTwotoneDislike
-              onClick={() => handleVote(proposal.nftTokenId, false)}
+              onClick={() => handleVote(proposal.proposalId , false)}
               className='text-red-600 cursor-pointer hover:text-red-800 transition duration-200 size-8'
             />
             <p className='text-lg font-medium text-black'>{proposal.nay}</p>

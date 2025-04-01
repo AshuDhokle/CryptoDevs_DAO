@@ -1,21 +1,28 @@
 import Web3Context from "@/Context/ContractContext";
 import { useContext, useState } from "react";
+import { HashLoader } from "react-spinners";
 
 const CreateProposal = () => {
-  const [nftId, setNftId] = useState("");
-
   const web3Context = useContext(Web3Context)
-  if(!web3Context) {
-    return (<></>)
-  }
-  const {createProposal} = web3Context;
-  
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const { daoContract, fetchProposals } = web3Context || {};
+
+  const [nftId, setNftId] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await createProposal(nftId);
-    } catch (error) {
-      console.log(error);
+    setLoading(true);
+    if (daoContract) {
+      try {
+        const tx = await daoContract?.createProposal(nftId, deadline);
+        await tx.wait();
+        fetchProposals && await fetchProposals();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -27,33 +34,48 @@ const CreateProposal = () => {
                        text-transparent bg-clip-text mb-6">
           Create a New Proposal
         </h1>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Proposal Title */}
           <div>
             <label className="block text-lg font-semibold text-gray-300">Token Id</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="w-full mt-2 px-4 py-3 text-white bg-transparent border-2 
                          border-gray-600 rounded-lg focus:outline-none focus:ring-2 
                          focus:ring-blue-500"
-              placeholder="Enter the token id..." 
-              value={nftId} 
-              onChange={(e) => setNftId(e.target.value)} 
-              required 
+              placeholder="Enter the token id..."
+              value={nftId}
+              onChange={(e) => setNftId(e.target.value)}
+              required
             />
           </div>
-
+          <div>
+            <label className="block text-lg font-semibold text-gray-300">Deadline <span className="text-pretty font-thin">(in seconds)</span></label>
+            <input
+              type="text"
+              className="w-full mt-2 px-4 py-3 text-white bg-transparent border-2 
+                         border-gray-600 rounded-lg focus:outline-none focus:ring-2 
+                         focus:ring-blue-500"
+              placeholder="Give the deadline in seconds"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+              required
+            />
+          </div>
           {/* Submit Button */}
-          <button 
-            type="submit" 
-            className="w-full py-3 mt-4 text-lg font-semibold text-white 
+          <div className={`grid ${loading ? 'grid-cols-2' : 'grid-cols-1'} items-center justify-center gap-4`}>
+            <button
+              type="submit"
+              className="w-full py-3 mt-4 text-lg font-semibold text-white 
                        bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg 
                        hover:from-purple-600 hover:to-blue-500 transition-all 
-                       duration-300 shadow-md active:scale-95"
-          >
-            Submit Proposal
-          </button>
+                       duration-300 shadow-md active:scale-95 "
+            >
+              Submit Proposal
+            </button>
+            {loading && <HashLoader className="mt-4" color="#57B4BA" />}
+          </div>
         </form>
       </div>
     </div>
