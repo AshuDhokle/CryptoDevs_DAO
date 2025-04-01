@@ -1,6 +1,5 @@
 import { network } from "hardhat";
 import Ihre from "../utils/Ihre";
-import { verify } from "../scripts/01_verify_NFT";
 
 export default async function ({getNamedAccounts, deployments} : Ihre){
    const {deploy, log} = deployments;
@@ -8,7 +7,7 @@ export default async function ({getNamedAccounts, deployments} : Ihre){
    const networkName = network.name
    // const chainId = network.config.chainId
    
-   const args : string[] = ['CryptoDev', 'CyDev'];
+   const args : string[] = ['bafybeidz76hbafxwcwieygeorazjhz6j2cnjlradbhf6bji6ev3swynlb4'];
    
    console.log(`Deploying CryptoDev__NFT`);
    

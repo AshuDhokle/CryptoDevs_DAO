@@ -1,6 +1,5 @@
 import { network } from "hardhat";
 import Ihre from "../utils/Ihre";
-import { verify } from "../scripts/03_verify_DAO";
 
 export default async function ({getNamedAccounts, deployments} : Ihre){
    const {deploy, log, get} = deployments;
