@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Provider from "./provider";
+import {Provider} from "./provider";
 import "./globals.css";
 import { Web3Provider } from "@/Context/ContractContext";
 

@@ -24,7 +24,7 @@ const SearchProposals = () => {
 
   const searchProposal = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const proposalFound = allProposals.find((p: ProposalType) => p.nftTokenId === parseInt(id));
+    const proposalFound = allProposals?.find((p: ProposalType) => p.nftTokenId === parseInt(id));
     setProposal(proposalFound || null); // Ensures state is reset if no proposal is found
   };
 

@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleWithdraw = async () => {
     setLoading(true);
     try {
-      withdraw && await withdraw();
+      await withdraw?.();
     } catch (error) {
       console.log(error);
     } finally {
@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleTransfer = async () => {
     setLoading(true);
     try {
-      transfer && await transfer();
+      await transfer?.();
     } catch (error) {
       console.log(error);
     } finally {

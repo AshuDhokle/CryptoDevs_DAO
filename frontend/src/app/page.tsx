@@ -1,6 +1,6 @@
 'use client'
 import Navbar from "@/components/Navbar";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Web3Context from "@/Context/ContractContext";
 import { HashLoader } from "react-spinners";
 import Footer from "@/components/Footer";
@@ -23,7 +23,7 @@ export default function Home() {
         const _price = ethers.parseEther('0.01');
         const tx =  await nftContract?.mint({ value: _price });
         await tx.wait();
-        updateBalance && updateBalance();
+        updateBalance?.();
         setConfettiOn(true);
         
         setTimeout(()=>{

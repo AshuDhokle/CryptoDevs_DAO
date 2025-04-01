@@ -22,7 +22,7 @@ const Proposal = ({ proposal }: ProposalProps) => {
     console.log(proposalId);
     
     if (!proposal.isActive){
-      voteOnProposal && voteOnProposal(proposalId, isYay === true ? '1' : '0');   
+      voteOnProposal?.(proposalId, isYay === true ? '1' : '0');   
     }
     else alert(`Can't vote: Deadline Exceeded`);
   };

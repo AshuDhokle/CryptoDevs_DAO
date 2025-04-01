@@ -17,7 +17,7 @@ const CreateProposal = () => {
       try {
         const tx = await daoContract?.createProposal(nftId, deadline);
         await tx.wait();
-        fetchProposals && await fetchProposals();
+        await fetchProposals?.();
       } catch (error) {
         console.log(error);
       } finally {

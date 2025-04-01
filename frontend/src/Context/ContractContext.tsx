@@ -5,12 +5,21 @@ import { ethers, Contract } from "ethers";
 import { nft_abi, nft_address } from "@/app/utils/nftContractInfo";
 import { dao_abi, dao_address } from "@/app/utils/daoContractInfo";
 import { useAccount } from "wagmi";
+
+interface IProposal {
+  proposalId: number;
+  nftTokenId: number;
+  deadline: number;
+  yay: number;
+  nay: number;
+  isActive: boolean;
+}
 import toast from "react-hot-toast";
 
 interface IWeb3Context {
   nftContract: Contract | null;
   daoContract: Contract | null,
-  allProposals: any;
+  allProposals: Array<IProposal>;
   fetchProposals: ()=> Promise<void>;
   voteOnProposal: (id: number, vote: string) => Promise<void>;
   nftBalance: string;
@@ -31,7 +40,7 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
 
   const [nftContract, setNftContract] = useState<Contract | null>(null);
   const [daoContract, setDaoContract] = useState<Contract | null>(null);
-  const [allProposals, setAllProposals] = useState<any>();
+  const [allProposals, setAllProposals] = useState<Array<IProposal>>([]);
   const [nftBalance, setNftBalance] = useState<string>('0')
   const [myNfts, setMyNfts] = useState<Array<string> | null>(null);
   const [isOwner, setIsOwner] = useState(false);
@@ -65,7 +74,7 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
       toast.success(`Proposal Created id: ${proposalID}`);
     };
   
-    const handleVoteSubmitted = (_:any,  vote : number) => {
+    const handleVoteSubmitted = (_:unknown,  vote : number) => {
       toast.success(`Voted submitted : ${vote === 0 ? 'YAY' : 'NAY'}`);
     };
   
@@ -143,7 +152,7 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
   
   const getMyNfts = async()=>{
     if(nftContract){
-      let tempNfts : Array<string> = []
+      const tempNfts : Array<string> = []
 
       for(let i = 0; i<Number(nftBalance); i++){
         const response = await nftContract.tokenOfOwnerByIndex(address, i);
@@ -176,7 +185,6 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
         tempAllProposals.push(formattedProposal);
       }
       
-      
       console.log(tempAllProposals);
       
       setAllProposals(tempAllProposals);
@@ -189,9 +197,8 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
     if (daoContract && nftContract) {
       try {
         const tx = await daoContract.voteOnProposal(id, vote);
-        const receipt = await tx.wait();
-        // console.log("Transaction Successful:", receipt);
-      } catch (error: any) {
+        await tx.wait();
+      } catch (error: unknown) {
         console.error("Transaction failed:", error);
       }
     }
