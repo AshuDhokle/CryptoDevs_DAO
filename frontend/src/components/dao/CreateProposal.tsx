@@ -36,7 +36,6 @@ const CreateProposal = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Proposal Title */}
           <div>
             <label className="block text-lg font-semibold text-gray-300">Token Id</label>
             <input
@@ -63,7 +62,6 @@ const CreateProposal = () => {
               required
             />
           </div>
-          {/* Submit Button */}
           <div className={`grid ${loading ? 'grid-cols-2' : 'grid-cols-1'} items-center justify-center gap-4`}>
             <button
               type="submit"

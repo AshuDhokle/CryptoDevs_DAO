@@ -14,7 +14,6 @@ const HeroSection = () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Hero Section */}
       <div className="p-24 flex flex-col lg:flex-row items-center justify-center text-center lg:text-left md:mb-20 lg:mb-10">
         <div className="lg:mr-10 ">
           <h1 className="m-2 p-2 text-7xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Shape the Future of CryptoDev</h1>
@@ -31,19 +30,19 @@ const HeroSection = () => {
       <div className="flex flex-row items-center justify-center">
       <button
         onClick={scrollToBottom}
-        className="mt-4 mx-2 text-xl font-semibold border border-gray-500 px-6 py-3 rounded-xl 
+        className="mt-4 mx-2 text-xl font-sans font-semibold border border-gray-900 px-6 py-3 rounded-xl 
            shadow-md transition-all duration-300 
-           bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 
-           hover:from-yellow-500 hover:to-yellow-600 hover:shadow-lg 
+           bg-gradient-to-r from-cyan-600 to-blue-500 text-white 
+           hover:from-cyan-500 hover:to-blue-400 hover:shadow-lg 
            active:scale-95 active:shadow-md"
       >
         Proposals
       </button>
       <button onClick={()=>{router.push('/')}}
-          className="mt-4 mx-2 text-xl font-semibold border border-gray-500 px-6 py-3 rounded-xl 
+          className="mt-4 mx-2 text-xl font-sans font-semibold border border-gray-900 px-6 py-3 rounded-xl 
           shadow-md transition-all duration-300 
-          bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 
-          hover:from-yellow-500 hover:to-yellow-600 hover:shadow-lg 
+          bg-gradient-to-r from-cyan-600 to-blue-500 text-white 
+          hover:from-cyan-500 hover:to-blue-400 hover:shadow-lg 
           active:scale-95 active:shadow-md">
             But CryptoDevs
       </button>
