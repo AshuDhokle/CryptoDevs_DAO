@@ -42,7 +42,7 @@ const SearchProposals = () => {
           <Proposal proposal={proposals.length > 0 ? proposals[proposals.length - 1] : null} />
         }
         {
-           proposals?.length! > 1 && <button onClick={()=>setShowAllProposals(true)} className='m-2 mt-4 underline font-sans'>Show All</button>
+          proposals?.length && proposals?.length > 1 && <button onClick={()=>setShowAllProposals(true)} className='m-2 mt-4 underline font-sans'>Show All</button>
         }
       </div>
     </div>

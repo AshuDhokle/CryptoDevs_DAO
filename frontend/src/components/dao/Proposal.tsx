@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { AiTwotoneLike, AiTwotoneDislike } from 'react-icons/ai'
 import { IProposal } from '@/app/utils/interfaces'
 import { voteOnProposal } from '@/app/utils/HelperFunction/contractInteraction'
+import { SyncLoader } from 'react-spinners'
 const Proposal = ({ proposal }: { proposal: IProposal | null }) => {
   const {daoContract, nftContract} = useContext(Web3Context) || {}
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,7 @@ const Proposal = ({ proposal }: { proposal: IProposal | null }) => {
                   />
                   <p className='text-lg font-medium text-black'>{proposal.nay}</p>
                 </div>
+                {loading && <SyncLoader size={4} />}
               </div>
               <h1 className={`text-md mx-6 font-medium ${proposal.executed ? 'text-red-600' : 'text-green-600' }`}>
                 {proposal.executed ? 'executed' : 'Active' }
