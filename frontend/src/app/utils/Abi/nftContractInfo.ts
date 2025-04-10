@@ -1,6 +1,6 @@
-export const nft_address = '0x2b7d17aa0B5B0A731453931Be2FBD6fF9f0ea456'
+export const nft_address = '0xd754bA4D3441275f45a9021385bCb6DAF96A9F39'
 
-export const nft_abi =[
+export const nft_abi = [
   {
     "inputs": [
       {

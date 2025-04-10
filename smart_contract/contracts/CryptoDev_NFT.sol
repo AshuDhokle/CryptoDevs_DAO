@@ -22,13 +22,15 @@ contract CryptoDevs is ERC721Enumerable, Ownable{
     }
      
     function mint() public payable{
+       require(totalSupply() < _MAX_SUPPLY, "NFT Exhausted!");
+
        if(msg.value < _PRICE){
         revert CRYPTODEVS__NOT_ENOUGH_ETH();
        }  
-
-       _safeMint(msg.sender, totalSupply());
        
-       uint256 tokenID = totalSupply();
+       _safeMint(msg.sender, totalSupply()+1);
+       
+       uint256 tokenID = totalSupply()+1;
        emit NFT_Minted(msg.sender, tokenID);
     }
 

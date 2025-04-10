@@ -10,12 +10,16 @@ export const connectContract = async (address: string, setNftContract: (val:Cont
             const signer = await provider.getSigner();
             let tempContract = new Contract(nft_address, nft_abi, signer);
             setNftContract(tempContract);
+            
             const owner = await tempContract.owner();
             const temp = owner === address
+            console.log(owner,temp);
+            
             setIsOwner(temp);
             tempContract = new Contract(dao_address, dao_abi, signer);
             setDaoContract(tempContract)
-            console.log(tempContract);
+            
+
         } catch (error) {
             console.log(error);
         }
